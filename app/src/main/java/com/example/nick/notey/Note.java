@@ -1,6 +1,7 @@
 package com.example.nick.notey;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 public class Note extends Activity {
 
+    private static final String LIST_FRAGMENT_TAG = "list frag";
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -37,7 +39,7 @@ public class Note extends Activity {
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(myDataSet);
         mRecyclerView.setAdapter(mAdapter);
-
+/*
         LinearLayout ll = (LinearLayout) findViewById(R.id.circle_layout);
 
         LayoutInflater inflater = (LayoutInflater)getSystemService(this.LAYOUT_INFLATER_SERVICE);
@@ -79,5 +81,22 @@ public class Note extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleList() {
+        Fragment f = getFragmentManager().findFragmentByTag(LIST_FRAGMENT_TAG);
+        if (f != null) {
+            getFragmentManager().popBackStack();
+        } else {
+            getFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.animator.slide_up,
+                            R.animator.slide_down,
+                            R.animator.slide_up,
+                            R.animator.slide_down)
+                    .add(R.id.list_fragment_container, Fragment
+                                    .instantiate(this, SlidingRelativeLayout.class.getName()),
+                            LIST_FRAGMENT_TAG
+                    ).addToBackStack(null).commit();
+        }
     }
 }
