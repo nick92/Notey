@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="theme_accent_color">#FF339999</color>
+    <color name="theme_accent_color_light">#44339999</color>
+
     <!-- inherit from the material theme -->
     <style name="AppTheme" parent="android:Theme.Material">
         <!-- Main theme colors -->
