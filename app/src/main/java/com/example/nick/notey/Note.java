@@ -1,5 +1,6 @@
 package com.example.nick.notey;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Outline;
@@ -25,7 +26,6 @@ public class Note extends Activity implements View.OnTouchListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private DataSource myDataSource;
     private String[] myDataSet;
     private ViewGroup activeButton = null;
     private ViewGroup buttonsContainer;
@@ -47,12 +47,14 @@ public class Note extends Activity implements View.OnTouchListener {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(myDataSet);
         mRecyclerView.setAdapter(mAdapter);
-        LinearLayout ll = (LinearLayout) findViewById(R.id.buttonsContainer);
+
+        addContentView(buttonsContainer, null);
         this.buttonsContainer = (ViewGroup) findViewById(R.id.buttonsContainer);
-        ViewGroup buttonHost = (ViewGroup) getLayoutInflater().inflate(R.layout.circle_view, buttonsContainer, false);
+        ViewGroup buttonHost = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_note, buttonsContainer, false);
         TextView button = (TextView) buttonHost.getChildAt(0);
 
         button.setText("Test 1");
