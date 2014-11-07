@@ -52,15 +52,21 @@ public class Note extends Activity implements View.OnTouchListener {
         mAdapter = new MyAdapter(myDataSet);
         mRecyclerView.setAdapter(mAdapter);
 
-        addContentView(buttonsContainer, null);
+        LayoutInflater inflater = getLayoutInflater();
+        getWindow().addContentView(inflater.inflate(R.layout.activity_note, null),
+                new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+
         this.buttonsContainer = (ViewGroup) findViewById(R.id.buttonsContainer);
-        ViewGroup buttonHost = (ViewGroup) getLayoutInflater().inflate(R.layout.activity_note, buttonsContainer, false);
+        ViewGroup buttonHost = (ViewGroup) getLayoutInflater().inflate(R.layout.my_circle, buttonsContainer, false);
         TextView button = (TextView) buttonHost.getChildAt(0);
 
-        button.setText("Test 1");
+
         buttonHost.setOnTouchListener(this);
         buttonsContainer.addView(buttonHost);
-        mLayoutManager.addView(buttonsContainer);
+        //mLayoutManager.addView(buttonsContainer);
+
         selectButton(((ViewGroup) buttonsContainer.getChildAt(0)), false);
 
     }
@@ -134,6 +140,7 @@ public class Note extends Activity implements View.OnTouchListener {
                 selectButton((ViewGroup) view, true, (int) motionEvent.getX(), (int) motionEvent.getY());
                 break;
         }
+        toggleList();
         return false;
     }
 

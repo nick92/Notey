@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/button_size"
-    android:layout_height="@dimen/button_size"
-    android:background="@drawable/circular_button"
-    android:stateListAnimator="@animator/button_elevation"
-    android:clickable="true"
-    >
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:foreground="?android:attr/selectableItemBackground"
+tools:layout_gravity="center">
+
     <TextView
+        android:id="@+id/text_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/circular_button_ripple_selector"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="@color/buttontext_selector"
-        android:duplicateParentState="true"
+        android:layout_height="100dp"
+        android:layout_gravity="top"
+        android:textColor="@android:color/white"
         android:gravity="center"
-        tools:text="Text"
-        tools:textColor="#000"
-        />
+        android:background="@drawable/my_rectangle"
+    />
+
+    <FrameLayout
+        android:id="@+id/list_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>

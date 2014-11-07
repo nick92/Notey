@@ -1,36 +1,56 @@
 package com.example.nick.notey;
 
+import android.app.ListFragment;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * Created by nick on 04/11/14.
  */
 
-public class SlidingRelativeLayout extends RelativeLayout {
+public class SlidingRelativeLayout extends ListFragment {
 
-    public SlidingRelativeLayout(Context context) {
-        super(context);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.sliding_fragment_layout, container, false);
     }
 
-    public SlidingRelativeLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setListAdapter(new MyListAdapter());
     }
 
-    public SlidingRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    public void setYFraction(final float fraction) {
-        float translationY = getHeight() * fraction;
-        setTranslationY(translationY);
-    }
-
-    public float getYFraction() {
-        if (getHeight() == 0) {
+    private class MyListAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return 30;
+        }
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+        @Override
+        public long getItemId(int position) {
             return 0;
         }
-        return getTranslationY() / getHeight();
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView result = (TextView) convertView;
+            if (result == null) {
+                result = (TextView) LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.list_item_view, parent, false);
+            }
+            result.setText("My custom element #" + position);
+            return result;
+        }
     }
 }
